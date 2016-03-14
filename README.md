@@ -15,11 +15,11 @@ Features
 
 * safe close buffer in one tag:
     
-    default: <C-c>
+    default: \<C-c\>
 
 * create new window:
 
-    default: <C-t>
+    default: \<C-t\>
 
 
 
