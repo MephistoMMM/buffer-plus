@@ -29,16 +29,27 @@ while you change mode between CE and SI , your contrl map keys of file stream co
 Usage
 --------
 
-use `<leader>bm` to change mode 
+use '\<leader\>bm' to change mode 
 
-use '<C-t>' to create new tab(buffer in SI)
-use '<C-n>' to change to next tab(buffer in SI)
-use '<C-p>' to change to preview tab(buffer in SI)
-use '<C-c>' to close tab(buffer in SI)
-use '<leader>bt' to create new buffer(tab in SI)
-use '<leader>bn' to change to next buffer(tab in SI)
-use '<leader>bp' to change to preview buffer(tab in SI)
-use '<leader>bc' to close buffer(tab in SI)
+use '\<C-t\>' to create new tab(buffer in SI)
+
+use '\<C-n\>' to change to next tab(buffer in SI)
+
+use '\<C-p\>' to change to preview tab(buffer in SI)
+
+use '\<C-c\>' to close tab(buffer in SI)
+
+use '\<leader\>bt' to create new buffer(tab in SI)
+
+use '\<leader\>bn' to change to next buffer(tab in SI)
+
+use '\<leader\>bp' to change to preview buffer(tab in SI)
+
+use '\<leader\>bc' to close buffer(tab in SI)
+
+if you use airline plugin, you are able to call BufferPlusModeString() , it return the string of current mode ('CE' or 'SI'), like me:
+   
+    let g:airline_section_a = airline#section#create(['mode', '❀ ','%{BufferPlusModeString()} ','branch'])
 
 
 Option
@@ -48,31 +59,31 @@ Option
 define default mode, 0 == CE mode, 1 == SI mode (default: 0) 
 
 ####g:BufferPlusChangeModeMap 
-change mode (default: '<leader>bm')
+change mode (default: '\<leader\>bm')
 
 ####g:BufferPlusCloseMap
-close the tab in CE (buffer in SI) (default: '<C-c>')
+close the tab in CE (buffer in SI) (default: '\<C-c\>')
 
 ####g:BufferPlusNewMap
-create new tab in CE (buffer in SI) (default: '<C-t>')
+create new tab in CE (buffer in SI) (default: '\<C-t\>')
 
 ####g:BufferPlusNextMap
-chagne to next tab in CE (buffer in SI) (default: '<C-t>')
+chagne to next tab in CE (buffer in SI) (default: '\<C-t\>')
 
 ####g:BufferPlusPrevMap
-chagne to preview tab in CE (buffer in SI) (default: '<C-t>')
+chagne to preview tab in CE (buffer in SI) (default: '\<C-t\>')
 
 ####g:BufferPlusOtherCloseMap
-create new buffer in CE (tab in SI) (default: '<leader>bc')
+create new buffer in CE (tab in SI) (default: '\<leader\>bc')
 
 ####g:BufferPlusOtherNewMap
-create new buffer in CE (tab in SI) (default: '<leader>bt')
+create new buffer in CE (tab in SI) (default: '\<leader\>bt')
 
 ####g:BufferPlusOtherNextMap
-chagne to next buffer in CE (tab in SI) (default: '<leader>bn')
+chagne to next buffer in CE (tab in SI) (default: '\<leader\>bn')
 
 ####g:BufferPlusOtherPrevMap
-chagne to preview buffer in CE (tab in SI) (default: '<leader>bp')
+chagne to preview buffer in CE (tab in SI) (default: '\<leader\>bp')
 
 
 
