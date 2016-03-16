@@ -1,6 +1,8 @@
 Buffer Plus
 ==========
-" a buffer plugin to make buffer contrl more powerful
+a buffer plugin to make buffer contrl more powerful
+
+[Mephis Pheies' blog](http://mephistopheies.me/2016/03/15/wo-xie-de-buffer-pluscha-jian/) show more details.
 
 Installation
 ------------
@@ -13,13 +15,64 @@ or if you are using `pathogen`:
 Features
 --------
 
-* safe close buffer in one tag:
+* safe close buffer while only one tag on vim
+* defined two mode 
+    * CE, (code edit)
+    * SI, (source insight)
+* change mode between CE and SI
+
+while you change mode between CE and SI , your contrl map keys of file stream contrl (new, next, preview, close) will not change !
+.e.g: 
+
+    default: <C-n> --> :tabnext<CR> in CE , <C-n> --> :bn<CR> in SI
     
-    default: \<C-c\>
+Usage
+--------
 
-* create new window:
+use `<leader>bm` to change mode 
 
-    default: \<C-t\>
+use '<C-t>' to create new tab(buffer in SI)
+use '<C-n>' to change to next tab(buffer in SI)
+use '<C-p>' to change to preview tab(buffer in SI)
+use '<C-c>' to close tab(buffer in SI)
+use '<leader>bt' to create new buffer(tab in SI)
+use '<leader>bn' to change to next buffer(tab in SI)
+use '<leader>bp' to change to preview buffer(tab in SI)
+use '<leader>bc' to close buffer(tab in SI)
+
+
+Option
+-------
+
+####g:BufferPlusDefaultMode
+define default mode, 0 == CE mode, 1 == SI mode (default: 0) 
+
+####g:BufferPlusChangeModeMap 
+change mode (default: '<leader>bm')
+
+####g:BufferPlusCloseMap
+close the tab in CE (buffer in SI) (default: '<C-c>')
+
+####g:BufferPlusNewMap
+create new tab in CE (buffer in SI) (default: '<C-t>')
+
+####g:BufferPlusNextMap
+chagne to next tab in CE (buffer in SI) (default: '<C-t>')
+
+####g:BufferPlusPrevMap
+chagne to preview tab in CE (buffer in SI) (default: '<C-t>')
+
+####g:BufferPlusOtherCloseMap
+create new buffer in CE (tab in SI) (default: '<leader>bc')
+
+####g:BufferPlusOtherNewMap
+create new buffer in CE (tab in SI) (default: '<leader>bt')
+
+####g:BufferPlusOtherNextMap
+chagne to next buffer in CE (tab in SI) (default: '<leader>bn')
+
+####g:BufferPlusOtherPrevMap
+chagne to preview buffer in CE (tab in SI) (default: '<leader>bp')
 
 
 
