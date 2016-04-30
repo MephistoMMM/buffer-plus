@@ -47,7 +47,7 @@ endif
 
 " 0 : CE mode
 " 1 : SI mode
-if !exists('g:BufferPlusDefaultMode') || g:BufferPlusDefaultMode != 1 || g:BufferPlusDefaultMode !=0
+if !exists('g:BufferPlusDefaultMode') && g:BufferPlusDefaultMode != 1 && g:BufferPlusDefaultMode != 0
     let g:BufferPlusNowMode = 0
 else
     let g:BufferPlusNowMode = g:BufferPlusDefaultMode
