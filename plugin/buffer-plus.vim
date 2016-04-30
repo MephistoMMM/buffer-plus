@@ -14,7 +14,7 @@ if !exists('g:BufferPlusChangeModeMap')
 end
 
 if !exists('g:BufferPlusCloseMap')
-  let g:BufferPlusCloseMap = "<C-c>"
+  let g:BufferPlusCloseMap = "<C-g>"
 end
 
 if !exists('g:BufferPlusNewMap')
