@@ -20,15 +20,35 @@ Features
     * CE, (code edit)
     * SI, (source insight)
 * change mode between CE and SI
+* change main control map prefix keys
 
-while you change mode between CE and SI , your contrl map keys of file stream contrl (new, next, preview, close) will not change !
+while you change mode between CE and SI , your main control map keys of file stream contrl (new, next, preview, close) will not change !
 .e.g: 
 
     default: <C-n> --> :tabnext<CR> in CE , <C-n> --> :bn<CR> in SI
-    
+
 Usage
 --------
 
+someone using vim is conditioned to control buffer while other controling tag. e.g. emacser like buffer.
+
+Thus there is two perferences :
+
+* perferences 'buffer'
+* perferences 'tag'
+
+You could change it by 
+    
+    set g:BufferPlusPerf = 'taga'      " default 'buffer'
+
+In 'buffer' perferences, your main control map prefix keys is 'Control', while assistant control map prefix keys being '<leader>'
+In 'tag' perferences your main control map prefix keys is '<leader>', while assistant control map prefix keys being 'Control'
+
+example:
+
+In 'tag' :
+
+```
 use '\<leader\>bm' to change mode 
 
 use '\<C-t\>' to create new tab(buffer in SI)
@@ -45,7 +65,8 @@ use '\<leader\>bn' to change to next buffer(tab in SI)
 
 use '\<leader\>bp' to change to preview buffer(tab in SI)
 
-use '\<leader\>bc' to close buffer(tab in SI)
+use '\<leader\>bd' to close buffer(tab in SI)
+```
 
 if you use airline plugin, you are able to call BufferPlusModeString() , it return the string of current mode ('CE' or 'SI'), like me:
    
@@ -54,6 +75,9 @@ if you use airline plugin, you are able to call BufferPlusModeString() , it retu
 
 Option
 -------
+
+####g:BufferPlusPerf 
+define preference 'buffer' or 'tag' (default: 'buffer')
 
 ####g:BufferPlusDefaultMode
 define default mode, 0 == CE mode, 1 == SI mode (default: 0) 
@@ -74,7 +98,7 @@ chagne to next tab in CE (buffer in SI) (default: '\<C-t\>')
 chagne to preview tab in CE (buffer in SI) (default: '\<C-t\>')
 
 ####g:BufferPlusOtherCloseMap
-create new buffer in CE (tab in SI) (default: '\<leader\>bc')
+create new buffer in CE (tab in SI) (default: '\<leader\>bd')
 
 ####g:BufferPlusOtherNewMap
 create new buffer in CE (tab in SI) (default: '\<leader\>bt')

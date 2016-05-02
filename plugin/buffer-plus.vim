@@ -6,52 +6,86 @@
 
 if exists('g:BufferPlusLoaded') || &cp
   finish
-end
+endif
 let g:BufferPlusLoaded = 1
+
+function! s:isIn(variable, ...)
+  let s:count = 1
+  while s:count <= a:0
+    if a:variable == a:{s:count}
+      return 1
+    endif
+  endwhile
+  return 0
+endfunction
+
+let s:buffers = {'close': '<leader>bd', 'new': '<leader>bt', 'next': '<leader>bn', 'prev': '<leader>bp'}
+let s:tags = {'close': '<C-c>', 'new': '<C-t>', 'next': '<C-n>', 'prev': '<C-p>'}
+
+function! s:getKeysValueAccordingTo(perf, keyname)
+  " if not find keyname in map, return '<M-x>'
+  " a joke for emacs users
+  if a:perf == 'buffer'
+    return get(s:buffers, a:keyname, '<M-x>')
+  else
+    return get(s:tags, a:keyname, 'M-x')
+  endif
+endfunction
+
+" user have two perferences to choose
+" buffer for emacser or buffer liker
+" "
+if !exists('g:BufferPlusPerf') || !s:isIn(g:BufferPlusPerf, "tag", "buffer") || g:BufferPlusPerf == "buffer"
+  let g:BufferPlusPerf = "buffer"
+  let g:BufferPlusDisl = "tag"
+else
+  let g:BufferPlusPerf = "tag"
+  let g:BufferPlusDisl = "buffer"
+endif
 
 if !exists('g:BufferPlusChangeModeMap')
   let g:BufferPlusChangeModeMap = "<leader>bm"
-end
+endif
 
 if !exists('g:BufferPlusCloseMap')
-  let g:BufferPlusCloseMap = "<C-g>"
-end
+  let g:BufferPlusCloseMap = s:getKeysValueAccordingTo(g:BufferPlusPerf, 'colse')
+endif
 
 if !exists('g:BufferPlusNewMap')
-  let g:BufferPlusNewMap = "<C-t>"
-end
+  let g:BufferPlusNewMap = s:getKeysValueAccordingTo(g:BufferPlusPerf, 'new')
+endif
 
 if !exists('g:BufferPlusNextMap')
-  let g:BufferPlusNextMap = "<C-n>"
-end
+  let g:BufferPlusNextMap = s:getKeysValueAccordingTo(g:BufferPlusPerf, 'next')
+endif
 
 if !exists('g:BufferPlusPrevMap')
-  let g:BufferPlusPrevMap = "<C-p>"
-end
+  let g:BufferPlusPrevMap = s:getKeysValueAccordingTo(g:BufferPlusPerf, 'prev')
+endif
 
 if !exists('g:BufferPlusOtherCloseMap')
-  let g:BufferPlusOtherCloseMap = "<leader>bc"
-end
+  let g:BufferPlusOtherCloseMap = s:getKeysValueAccordingTo(g:BufferPlusDisl, 'colse')
+endif
 
 if !exists('g:BufferPlusOtherNewMap')
-  let g:BufferPlusOtherNewMap = "<leader>bt"
-end
+  let g:BufferPlusOtherNewMap = s:getKeysValueAccordingTo(g:BufferPlusDisl, 'new')
+endif
 
 if !exists('g:BufferPlusOtherNextMap')
-  let g:BufferPlusOtherNextMap = "<leader>bn"
-end
+  let g:BufferPlusOtherNextMap = s:getKeysValueAccordingTo(g:BufferPlusDisl, 'next')
+endif
 
 if !exists('g:BufferPlusOtherPrevMap')
-  let g:BufferPlusOtherPrevMap = "<leader>bp"
+  let g:BufferPlusOtherPrevMap = s:getKeysValueAccordingTo(g:BufferPlusDisl, 'prev')
 endif
 
 " 0 : CE mode
 " 1 : SI mode
-if !exists('g:BufferPlusDefaultMode') && g:BufferPlusDefaultMode != 1 && g:BufferPlusDefaultMode != 0
+if !exists('g:BufferPlusDefaultMode') || !s:isIn(g:BufferPlusDefaultMode, 1, 0)
     let g:BufferPlusNowMode = 0
 else
     let g:BufferPlusNowMode = g:BufferPlusDefaultMode
-end
+endif
 
 
 " TODO: 
@@ -62,7 +96,7 @@ function! BufferPlusSafeCloseBufferInOneTag()
     " u tag buffer need be close
     if buflisted(nowNumber) == 0
         execute 'close'
-    end
+    endif
     
     let nextNumber = bufnr("#")
 
@@ -71,7 +105,7 @@ function! BufferPlusSafeCloseBufferInOneTag()
         execute 'bw '.nowNumber
     else
         echo "This is the last buffer!"
-    end
+    endif
 endfunction
 
 function! s:ChangeToSIMode()
@@ -101,7 +135,7 @@ function! s:BufferPlusChangeMode()
         call s:ChangeToCEMode()
     else 
         call s:ChangeToSIMode()
-    end
+    endif
 endfunction
 
 function! BufferPlusModeStatusChange()
@@ -109,7 +143,7 @@ function! BufferPlusModeStatusChange()
         let g:BufferPlusNowMode = 1
     else 
         let g:BufferPlusNowMode = 0
-    end
+    endif
     call s:BufferPlusChangeMode()
 endfunction
 
@@ -118,7 +152,7 @@ function! BufferPlusModeString()
         return "CE"
     else
         return "SI"
-    end
+    endif
 endfunction
 
 function! BufferPlusInit()
