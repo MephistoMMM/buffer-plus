@@ -39,7 +39,7 @@ Thus there is two perferences :
 
 You could change it by 
     
-    set g:BufferPlusPerf = 'taga'      " default 'buffer'
+    set g:BufferPlusPerf = 'taga'      " default 'tag'
 
 In 'buffer' perferences, your main control map prefix keys is 'Control', while assistant control map prefix keys being '<leader>'
 In 'tag' perferences your main control map prefix keys is '<leader>', while assistant control map prefix keys being 'Control'

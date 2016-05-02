@@ -15,6 +15,7 @@ function! s:isIn(variable, ...)
     if a:variable == a:{s:count}
       return 1
     endif
+    let s:count = s:count + 1
   endwhile
   return 0
 endfunction
@@ -28,19 +29,19 @@ function! s:getKeysValueAccordingTo(perf, keyname)
   if a:perf == 'buffer'
     return get(s:buffers, a:keyname, '<M-x>')
   else
-    return get(s:tags, a:keyname, 'M-x')
+    return get(s:tags, a:keyname, '<M-x>')
   endif
 endfunction
 
 " user have two perferences to choose
 " buffer for emacser or buffer liker
 " "
-if !exists('g:BufferPlusPerf') || !s:isIn(g:BufferPlusPerf, "tag", "buffer") || g:BufferPlusPerf == "buffer"
-  let g:BufferPlusPerf = "buffer"
-  let g:BufferPlusDisl = "tag"
-else
+if !exists('g:BufferPlusPerf') || !s:isIn(g:BufferPlusPerf, "tag", "buffer") || g:BufferPlusPerf == "tag"
   let g:BufferPlusPerf = "tag"
   let g:BufferPlusDisl = "buffer"
+else
+  let g:BufferPlusPerf = "buffer"
+  let g:BufferPlusDisl = "tag"
 endif
 
 if !exists('g:BufferPlusChangeModeMap')
